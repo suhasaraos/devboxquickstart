@@ -4,7 +4,7 @@ az extension add --upgrade -n devcenter
 # Set Variables
 ResourceGroupName=devbox-csu-rg
 ResourceLocation=australiaeast
-DevCenterName=CSUBootcampDevCenter2
+DevCenterName=CSUBootcampDevCenter
 ProjectName=CSUDevProject
 ProjectDescription='This is CSU Bootcamp demo project.'
 DevBoxDefinitionName="CSUDevBox"
