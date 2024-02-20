@@ -10,7 +10,7 @@ ProjectDescription='This is CSU Bootcamp demo project.'
 DevBoxDefinitionName="CSUDevBox"
 DevPool="CSUDevPool"
 SubscriptionId=$(az account show --query id -o tsv)
-CurrentUserId=$(az ad signed-in-user show --query objectId -o tsv)
+CurrentUserId=$(az ad signed-in-user show --query id -o tsv)
 
 # Create a new RG
 az group create --name $ResourceGroupName --location $ResourceLocation
@@ -19,13 +19,13 @@ az group create --name $ResourceGroupName --location $ResourceLocation
 az devcenter admin devcenter create --location $ResourceLocation --name $DevCenterName --resource-group $ResourceGroupName
 
 # Set your Dev-center-Id
-DevCenterId="/subscriptions/$SubscriptionId/resourceGroups/devbox-demo-rg/providers/Microsoft.DevCenter/devcenters/$DevCenterName"
+DevCenterId="/subscriptions/$SubscriptionId/resourceGroups/$ResourceGroupName/providers/Microsoft.DevCenter/devcenters/$DevCenterName"
 
 # Next create a project (takes about 3-4 mins)
 az devcenter admin project create --location $ResourceLocation --description "$ProjectDescription" --dev-center-id "$DevCenterId" --name $ProjectName --resource-group $ResourceGroupName --max-dev-boxes-per-user "3"
 
 # Set your DevBox compute gallery image reference Id
-ImageReferenceId="/subscriptions/$SubscriptionId/resourceGroups/devbox-demo-rg/providers/Microsoft.DevCenter/devcenters/$DevCenterName/galleries/Default/images/microsoftvisualstudio_visualstudioplustools_vs-2022-ent-general-win11-m365-gen2"
+ImageReferenceId="/subscriptions/$SubscriptionId/resourceGroups/$ResourceGroupName/providers/Microsoft.DevCenter/devcenters/$DevCenterName/galleries/Default/images/microsoftvisualstudio_visualstudioplustools_vs-2022-ent-general-win11-m365-gen2"
 
 # Create devbox definitions (takes about 2-3 minutes)
 az devcenter admin devbox-definition create --location $ResourceLocation  --image-reference id="$ImageReferenceId" --name $DevBoxDefinitionName  --dev-center-name "$DevCenterName"  --resource-group $ResourceGroupName  --os-storage-type "ssd_256gb" --sku name="general_i_8c32gb256ssd_v2" --hibernate-support enabled
@@ -33,5 +33,8 @@ az devcenter admin devbox-definition create --location $ResourceLocation  --imag
 # Create DevPool (takes about 5 mins)
 az devcenter admin pool create --location $ResourceLocation  --devbox-definition-name $DevBoxDefinitionName --virtual-network-type managed --pool-name $DevPool --project-name $ProjectName --resource-group $ResourceGroupName --local-administrator "Enabled" --managed-virtual-network-regions $ResourceLocation
 
+# Set your DevCenter-Project-Id
+ProjectResourceId="/subscriptions/$SubscriptionId/resourceGroups/$ResourceGroupName/providers/Microsoft.DevCenter/projects/$ProjectName"
+
 # Assign permissions to current user to login and create a devbox at devbox.microsoft.com; Note: Use of guest accounts or personal accounts is not supported.
-az role assignment create --assignee $CurrentUserId --role "DevCenter Dev Box User" --scope "<project-resource-id>"
+az role assignment create --assignee $CurrentUserId --role "DevCenter Dev Box User" --scope $ProjectResourceId
