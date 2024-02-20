@@ -9,7 +9,7 @@ ProjectName=DevProject
 ProjectDescription='This is CSU Bootcamp demo project.'
 DevBoxDefinitionName="CSUDevBox"
 DevPool="DevPool"
-SubscriptionId="your subscription ID"
+SubscriptionId=$(az account show --query id -o tsv)
 
 # Create a new RG
 az group create --name $ResourceGroupName --location $ResourceLocation
