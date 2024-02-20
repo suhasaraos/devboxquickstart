@@ -11,7 +11,7 @@ DevBoxDefinitionName="CSUDevBox"
 DevPool="DevPool"
 
 # Create a new RG
-az group create --name $MyResourceGroup --location $ResourceLocation
+az group create --name $ResourceGroupName --location $ResourceLocation
 
 # 1. Create Dev Center (should take about 2-3 mins)
 az devcenter admin devcenter create --location $ResourceLocation --name $DevCenterName --resource-group $ResourceGroupName
