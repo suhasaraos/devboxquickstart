@@ -61,7 +61,7 @@ This step might take 2-3 minutes to complete.
    ```bash
     DevCenterId="/subscriptions/$SubscriptionId/resourceGroups/$ResourceGroupName/providers/Microsoft.DevCenter/devcenters/$DevCenterName"
 
-1. Create a Project
+1. Create a Project  
 Expect this to take about 3-4 minutes.
    ```bash
     az devcenter admin project create --location $ResourceLocation --description "$ProjectDescription" --dev-center-id "$DevCenterId" --name $ProjectName --resource-group $ResourceGroupName --max-dev-boxes-per-user "3"
