@@ -6,7 +6,7 @@ Welcome to the  setup guide for your Hands-on Lab Challenge using Microsoft Dev 
 Before you begin, ensure you have the following:
 1. A Microsoft 365 subscription, required for Intune.
 1. An Azure subscription. Please use your external subscription and avoid guest accounts for this setup.
-1. Either use Azure Cloud Shell or Ensure AzCli you've installed is up to date. 
+1. Either use Azure Cloud Shell or ensure Az CLI you've installed is up to date. 
 
 ## Understanding Microsoft Dev Box Components
 Microsoft Dev Box gives developers self-service access to preconfigured and ready-to-code cloud-based workstations. You can configure the service to meet your development team and project structure, and manage security and network settings to access resources securely. Different components play a part in the configuration of Microsoft Dev Box.
