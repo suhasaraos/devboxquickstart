@@ -9,6 +9,7 @@ ProjectName=DevProject
 ProjectDescription='This is CSU Bootcamp demo project.'
 DevBoxDefinitionName="CSUDevBox"
 DevPool="DevPool"
+SubscriptionId="your subscription ID"
 
 # Create a new RG
 az group create --name $MyResourceGroup --location $ResourceLocation
@@ -18,7 +19,7 @@ az devcenter admin devcenter create --location $ResourceLocation --name $DevCent
 
 
 # Set your Dev-center-Id
-DevCenterId='/subscriptions/{subscriptionId}/resourceGroups/devbox-demo-rg/providers/Microsoft.DevCenter/devcenters/ContosoDevCenter'
+DevCenterId='/subscriptions/$SubscriptionId/resourceGroups/devbox-demo-rg/providers/Microsoft.DevCenter/devcenters/ContosoDevCenter'
 
 # 2. Next create a project (takes about 3-4 mins)
 az devcenter admin project create --location $ResourceLocation --description "$ProjectDescription" --dev-center-id 
@@ -26,7 +27,7 @@ az devcenter admin project create --location $ResourceLocation --description "$P
 
 
 # 3. Set your DevBox compute gallery image reference Id
-ImageReferenceId='/subscriptions/{subscriptionId}/resourceGroups/devbox-demo-rg/providers/Microsoft.DevCenter/devcenters/ContosoDevCenter/galleries/Default/images/microsoftvisualstudio_visualstudioplustools_vs-2022-ent-general-win11-m365-gen2'
+ImageReferenceId='/subscriptions/$SubscriptionId/resourceGroups/devbox-demo-rg/providers/Microsoft.DevCenter/devcenters/ContosoDevCenter/galleries/Default/images/microsoftvisualstudio_visualstudioplustools_vs-2022-ent-general-win11-m365-gen2'
 
 # Create devbox definitions (takes about 2-3 minutes)
 az devcenter admin devbox-definition create --location $ResourceLocation  --image-reference id="$ImageReferenceId" --name $DevBoxDefinitionName  --dev-center-name "$DevCenterName"  --resource-group $ResourceGroupName  --os-storage-type "ssd_256gb" --sku name="general_i_8c32gb256ssd_v2" --hibernate-support enabled
